@@ -49,7 +49,7 @@ export default function ParticipantsForm() {
   const [participants, setParticipants] = useState<number[]>([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
+  const [result, setResult] = useState(null);
   const handleParticipantChange = useCallback((event) => {
     const selectedOptions = Array.from(event.target.selectedOptions).map(
       (option: any) => option.value
@@ -66,14 +66,23 @@ export default function ParticipantsForm() {
         end: endDate,
       },
     };
+    setResult(
+      getAvailableSlots(
+        participants,
+        participantAvailability,
+        schedules,
+        inputData
+      )
+    );
     console.log(inputData);
     console.log(
       getAvailableSlots(
         participants,
         participantAvailability,
         schedules,
-        input
-      ), "result"
+        inputData
+      ),
+      "result"
     );
   };
   return (
@@ -81,32 +90,57 @@ export default function ParticipantsForm() {
       <div className="main-container">
         <form onSubmit={handleSubmit} className="main-form">
           <label htmlFor="participants">Participants:</label>
-          <select id="participants" multiple onChange={handleParticipantChange}>
+          <select
+            id="participants"
+            multiple
+            onChange={handleParticipantChange}
+            title="click ctrl+ select to add participants"
+          >
             {Object.entries(participantsData).map(([id, participant]) => (
               <option key={id} value={id}>
                 {participant.name}
               </option>
             ))}
           </select>
-
           <label htmlFor="startDate">Start Date:</label>
           <input
             type="date"
-            id="birthday"
-            name="birthday"
-            onChange={(event) => setStartDate(formatDate(event.target.value))}
+            id="start"
+            name="start"
+            onChange={(event) => setStartDate(event.target.value)}
+            placeholder="Start Date"
           ></input>
 
           <label htmlFor="endDate">End Date:</label>
           <input
             type="date"
-            id="birthday"
-            name="birthday"
-            onChange={(event) => setEndDate(formatDate(event.target.value))}
+            id="end"
+            name="end"
+            onChange={(event) => setEndDate(event.target.value)}
           ></input>
-
-          <button type="submit">Submit</button>
+          <button className="submit-btn" type="submit">
+            Submit
+          </button>
         </form>
+
+        {result && (
+          <div className="availability-list">
+            {Object.entries(result).map(([date, slots]: any) => (
+              <>
+                <div className="slot-card" key={date}>
+                  <div className="slot-date">{formatDate(date)}:</div>
+                  <ul>
+                    {slots.map((slot: any, index: any) => (
+                      <li className="slot-list-row" key={index}>
+                        {slot}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

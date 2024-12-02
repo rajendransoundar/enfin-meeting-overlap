@@ -10,7 +10,7 @@ export function formatDate(dateString) {
 
 export function getAvailableSlots(participants, participantAvailability, schedules, input) {
   const { participant_ids, date_range } = input;
-  // console.log(participant_ids, date_range, "input");
+  console.log(participant_ids, date_range, "input");
   
   const result = {};
   

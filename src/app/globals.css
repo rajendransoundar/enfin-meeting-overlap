@@ -1,13 +1,76 @@
-.main-container{
+:root {
+  --primary: rgb(94, 94, 250);
+  --font-color: #868685;
+  --grey: #e4e2e0;
+}
+
+.main-container {
   display: flex;
   flex-direction: column;
   margin: 50px auto;
 }
-.main-form{
+.main-form {
   display: flex;
   flex-direction: column;
   margin: auto;
 }
-.main-form input, .main-form label, .main-form select, .main-form button{
-  margin: 10px 0;
+.main-form input,
+.main-form select,
+.main-form button {
+  margin: 5px 0 15px 0;
+}
+.main-form select,
+.main-form input,
+.main-form select:focus,
+.main-form input:focus {
+  border: 0;
+  background-color: var(--grey);
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  border-radius: 8px;
+  outline: none;
+}
+.main-form label{
+  font-weight: 600;
+  color: var(--font-color);
+}
+.submit-btn {
+  background-color: var(--primary);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 16px;
+  padding: 15px;
+  text-transform: uppercase;
+}
+.slot-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+}
+.slot-date {
+  width: 15%;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--font-color);
+}
+.availability-list {
+  margin: 20px auto;
+}
+.availability-list ul {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 85%;
+}
+.slot-list-row {
+  list-style: none;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 10px;
+  border-radius: 30px;
 }
