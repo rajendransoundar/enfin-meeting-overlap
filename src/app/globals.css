@@ -31,7 +31,7 @@
   border-radius: 8px;
   outline: none;
 }
-.main-form label{
+.main-form label {
   font-weight: 600;
   color: var(--font-color);
 }
@@ -68,6 +68,10 @@
   width: 85%;
 }
 .slot-list-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
   list-style: none;
   background-color: var(--primary);
   color: #fff;

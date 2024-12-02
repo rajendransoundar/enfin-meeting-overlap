@@ -3,41 +3,6 @@
 import React, { useCallback, useState } from "react";
 import { formatDate, getAvailableSlots } from "../utils";
 
-// const participantsData = {
-//   1: { name: "Adam", threshold: 4 },
-//   2: { name: "Bosco", threshold: 4 },
-//   3: { name: "Catherine", threshold: 5 },
-// };
-// const participantAvailability = {
-//   1: {
-//     Monday: [
-//       { start: "09:00", end: "11:00" },
-//       { start: "14:00", end: "16:30" },
-//     ],
-//     Tuesday: [{ start: "09:00", end: "18:00" }],
-//   },
-//   2: {
-//     Monday: [{ start: "09:00", end: "18:00" }],
-//     Tuesday: [{ start: "09:00", end: "11:30" }],
-//   },
-//   3: {
-//     Monday: [{ start: "09:00", end: "18:00" }],
-//     Tuesday: [{ start: "09:00", end: "18:00" }],
-//   },
-// };
-
-// const schedules = {
-//   1: {
-//     "28/10/2024": [
-//       { start: "09:30", end: "10:30" },
-//       { start: "15:00", end: "16:30" },
-//     ],
-//   },
-//   2: {
-//     "28/10/2024": [{ start: "13:00", end: "13:30" }],
-//     "29/10/2024": [{ start: "09:00", end: "10:30" }],
-//   },
-// };
 export default function ParticipantsForm({ data }) {
   const { participantsData, participantAvailability, schedules } = data;
   const [participants, setParticipants] = useState([]);
@@ -120,18 +85,17 @@ export default function ParticipantsForm({ data }) {
         {result && (
           <div className="availability-list">
             {Object.entries(result).map(([date, slots]: any) => (
-              <>
-                <div className="slot-card" key={date}>
-                  <div className="slot-date">{formatDate(date)}:</div>
-                  <ul>
-                    {slots.map((slot: any, index: any) => (
-                      <li className="slot-list-row" key={index}>
-                        {slot}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </>
+              <div className="slot-card" key={date}>
+                <div className="slot-date">{formatDate(date)}:</div>
+                <ul>
+                  {slots.map((slot: any) => (
+                    <li className="slot-list-row" key={`${date}-${slot}`}>
+                      <ClockIcon />
+                      <span>{slot}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         )}
@@ -139,3 +103,34 @@ export default function ParticipantsForm({ data }) {
     </>
   );
 }
+
+const ClockIcon = () => {
+  return (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20px"
+        height="20px"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#000000"
+      >
+        <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+        <g
+          id="SVGRepo_tracerCarrier"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M3 5.5L5 3.5M21 5.5L19 3.5M12 8.5V12.5L14 14.5M20 12.5C20 16.9183 16.4183 20.5 12 20.5C7.58172 20.5 4 16.9183 4 12.5C4 8.08172 7.58172 4.5 12 4.5C16.4183 4.5 20 8.08172 20 12.5Z"
+            stroke="#ffff"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      </svg>
+    </>
+  );
+};
