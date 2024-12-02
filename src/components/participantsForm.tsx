@@ -3,50 +3,44 @@
 import React, { useCallback, useState } from "react";
 import { formatDate, getAvailableSlots } from "../utils";
 
-const participantsData = {
-  1: { name: "Adam", threshold: 4 },
-  2: { name: "Bosco", threshold: 4 },
-  3: { name: "Catherine", threshold: 5 },
-};
-const participantAvailability = {
-  1: {
-    Monday: [
-      { start: "09:00", end: "11:00" },
-      { start: "14:00", end: "16:30" },
-    ],
-    Tuesday: [{ start: "09:00", end: "18:00" }],
-  },
-  2: {
-    Monday: [{ start: "09:00", end: "18:00" }],
-    Tuesday: [{ start: "09:00", end: "11:30" }],
-  },
-  3: {
-    Monday: [{ start: "09:00", end: "18:00" }],
-    Tuesday: [{ start: "09:00", end: "18:00" }],
-  },
-};
+// const participantsData = {
+//   1: { name: "Adam", threshold: 4 },
+//   2: { name: "Bosco", threshold: 4 },
+//   3: { name: "Catherine", threshold: 5 },
+// };
+// const participantAvailability = {
+//   1: {
+//     Monday: [
+//       { start: "09:00", end: "11:00" },
+//       { start: "14:00", end: "16:30" },
+//     ],
+//     Tuesday: [{ start: "09:00", end: "18:00" }],
+//   },
+//   2: {
+//     Monday: [{ start: "09:00", end: "18:00" }],
+//     Tuesday: [{ start: "09:00", end: "11:30" }],
+//   },
+//   3: {
+//     Monday: [{ start: "09:00", end: "18:00" }],
+//     Tuesday: [{ start: "09:00", end: "18:00" }],
+//   },
+// };
 
-const schedules = {
-  1: {
-    "28/10/2024": [
-      { start: "09:30", end: "10:30" },
-      { start: "15:00", end: "16:30" },
-    ],
-  },
-  2: {
-    "28/10/2024": [{ start: "13:00", end: "13:30" }],
-    "29/10/2024": [{ start: "09:00", end: "10:30" }],
-  },
-};
-const input = {
-  participant_ids: [1, 2, 3],
-  date_range: {
-    start: "2024-10-11",
-    end: "2024-10-14",
-  },
-};
-export default function ParticipantsForm() {
-  const [participants, setParticipants] = useState<number[]>([]);
+// const schedules = {
+//   1: {
+//     "28/10/2024": [
+//       { start: "09:30", end: "10:30" },
+//       { start: "15:00", end: "16:30" },
+//     ],
+//   },
+//   2: {
+//     "28/10/2024": [{ start: "13:00", end: "13:30" }],
+//     "29/10/2024": [{ start: "09:00", end: "10:30" }],
+//   },
+// };
+export default function ParticipantsForm({ data }) {
+  const { participantsData, participantAvailability, schedules } = data;
+  const [participants, setParticipants] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [result, setResult] = useState(null);
@@ -96,7 +90,7 @@ export default function ParticipantsForm() {
             onChange={handleParticipantChange}
             title="click ctrl+ select to add participants"
           >
-            {Object.entries(participantsData).map(([id, participant]) => (
+            {Object.entries(participantsData).map(([id, participant]: any) => (
               <option key={id} value={id}>
                 {participant.name}
               </option>
