@@ -7,7 +7,10 @@
 .main-container {
   display: flex;
   flex-direction: column;
-  margin: 50px auto;
+  margin: 30px auto;
+}
+.main-container h1{
+  text-align: center;
 }
 .main-form {
   display: flex;

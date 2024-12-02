@@ -47,8 +47,9 @@ export default function ParticipantsForm({ data }) {
   return (
     <>
       <div className="main-container">
+        <h1>Check Availability</h1>
         <form onSubmit={handleSubmit} className="main-form">
-          <label htmlFor="participants">Participants:</label>
+          <label htmlFor="participants">{`Choose Participants: (ctrl+option)`}</label>
           <select
             id="participants"
             multiple
@@ -67,7 +68,6 @@ export default function ParticipantsForm({ data }) {
             id="start"
             name="start"
             onChange={(event) => setStartDate(event.target.value)}
-            placeholder="Start Date"
           ></input>
 
           <label htmlFor="endDate">End Date:</label>
